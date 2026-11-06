@@ -1,0 +1,10 @@
+@extends('layouts.portal')
+@section('title', 'Request a certificate')
+@section('content')
+<div class="module-heading"><div><p class="eyebrow">MY ACCOUNT <span>/</span> CERTIFICATES</p><h1>Request a certificate</h1><p class="heading-copy">Submit your request to the Barangay Estanza office for review.</p></div><a class="secondary-action" href="{{ route('my.certificates.index') }}">My requests</a></div>
+<section class="panel form-panel"><form method="POST" action="{{ route('my.certificates.store') }}">@csrf
+<div class="section-label">Applicant details</div><p class="form-intro">Choose the certificate you need and tell us what it’s for. Your account name and email will be included. The office will review your request, and you can follow its status under My requests.</p>
+<div class="form-grid"><label class="field">Full name<input value="{{ auth()->user()->name }}" disabled></label><label class="field">Email address<input value="{{ auth()->user()->email }}" disabled></label><label class="field">Phone number <span>*</span><input type="tel" name="requester_phone" value="{{ old('requester_phone') }}" maxlength="30" autocomplete="tel" required></label><label class="field">Barangay address <span>*</span><input name="requester_address" value="{{ old('requester_address') }}" maxlength="500" autocomplete="street-address" required></label>
+<label class="field field-wide">Certificate type <span>*</span><select name="request_type" required><option value="">Choose a certificate…</option>@foreach ($types as $type)<option value="{{ $type }}" @selected(old('request_type') === $type)>{{ $type }}</option>@endforeach</select></label><label class="field field-wide">Purpose <span>*</span><textarea name="purpose" rows="4" maxlength="2000" required>{{ old('purpose') }}</textarea><small>Explain why you need this certificate.</small></label></div>
+<div class="form-actions"><a class="secondary-action" href="{{ route('dashboard') }}">Cancel</a><button class="primary-action" type="submit">Submit request</button></div></form></section>
+@endsection

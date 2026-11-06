@@ -1,0 +1,6 @@
+@extends('layouts.portal')
+@section('title', 'My certificate requests')
+@section('content')
+<div class="module-heading"><div><p class="eyebrow">MY ACCOUNT <span>/</span> CERTIFICATES</p><h1>My certificate requests</h1><p class="heading-copy">Check the status of certificate requests you submitted.</p></div><a class="primary-action" href="{{ route('my.certificates.create') }}">Request a certificate</a></div>
+<section class="panel module-panel"><div class="table-wrap"><table><thead><tr><th>Certificate</th><th>Purpose</th><th>Submitted</th><th>Status</th><th>Office update</th></tr></thead><tbody>@forelse ($requests as $request)<tr><td>{{ $request->request_type }}</td><td class="purpose-cell">{{ $request->purpose }}</td><td>{{ $request->created_at->format('M j, Y') }}</td><td><span class="status-pill {{ $request->status }}"><i></i>{{ ['pending' => 'Waiting for review', 'approved' => 'Approved', 'rejected' => 'Not approved', 'issued' => 'Ready'][strtolower($request->status)] ?? ucfirst($request->status) }}</span></td><td>{{ $request->staff_notes ?: 'No update yet' }}</td></tr>@empty<tr><td colspan="5" class="empty-table">You have no certificate requests yet. When you send one, you can follow its progress here.</td></tr>@endforelse</tbody></table></div><div class="pagination-row">{{ $requests->links() }}</div></section>
+@endsection

@@ -1,0 +1,75 @@
+erDiagram
+    USERS {
+        bigint id PK
+        string name
+        string email UK
+        string password
+        string role
+        string first_name
+        string middle_name
+        string last_name
+        date birth_date
+        string phone
+        boolean is_verified
+        bigint resident_id FK
+    }
+    RESIDENTS {
+        bigint id PK
+        string first_name
+        string middle_name
+        string last_name
+        string suffix
+        date birth_date
+        string gender
+        string civil_status
+        string purok
+        text address
+        string phone
+        boolean is_active
+        timestamp deleted_at
+    }
+    SERVICE_REQUESTS {
+        bigint id PK
+        bigint resident_id FK
+        bigint requester_id FK
+        bigint processed_by FK
+        string requester_name
+        string requester_email
+        string request_type
+        text purpose
+        string status
+        text staff_notes
+        timestamp processed_at
+        timestamp deleted_at
+    }
+    PROBLEM_REPORTS {
+        bigint id PK
+        bigint user_id FK
+        bigint processed_by FK
+        string reporter_name
+        string reporter_email
+        string reporter_phone
+        string category
+        string subject
+        text description
+        string location
+        string status
+        text staff_notes
+        timestamp processed_at
+        timestamp deleted_at
+    }
+    ANNOUNCEMENTS {
+        bigint id PK
+        bigint created_by FK
+        string title
+        text body
+        timestamp published_at
+    }
+
+    RESIDENTS o|--o{ USERS : linked_accounts
+    RESIDENTS o|--o{ SERVICE_REQUESTS : subject_of
+    USERS o|--o{ SERVICE_REQUESTS : submits
+    USERS o|--o{ SERVICE_REQUESTS : processes
+    USERS o|--o{ PROBLEM_REPORTS : submits
+    USERS o|--o{ PROBLEM_REPORTS : processes
+    USERS o|--o{ ANNOUNCEMENTS : authors

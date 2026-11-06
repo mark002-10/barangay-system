@@ -1,0 +1,19 @@
+flowchart LR
+    R[Resident browser]
+    S[Staff / Admin browser]
+    N[Nginx web server]
+    V[Vite-built CSS and JavaScript]
+    L[Laravel 12 application]
+    MW[Authentication, role, verification, validation, throttling]
+    C[Controllers]
+    M[Eloquent models]
+    DB[(MySQL database)]
+    MAIL[Configured mail transport]
+
+    R --> N
+    S --> N
+    N -->|Static assets| V
+    N -->|Application requests| L
+    L --> MW --> C --> M --> DB
+    C -->|Password reset notification| MAIL
+    L -->|Blade HTML response| N
