@@ -81,13 +81,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-# Project Contributors
+# Project Authors
 
-## Author
-**Mark Anthony L. Banga**
+This project was developed collaboratively by:
 
-## Contributors
-1. Daniela Nicole E. Ruin
-2. Lea May L. Llona
-3. John Marl A. Abogado
-
+1. Mark Anthony L. Banga
+2. Daniela Nicole E. Ruin
+3. Lea May L. Llona
+4. John Marl A. Abogado
